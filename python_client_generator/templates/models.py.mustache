@@ -1,0 +1,24 @@
+from datetime import datetime
+from enum import Enum
+from typing import Any, Dict, List, Literal, Optional, Union
+from uuid import UUID
+
+from pydantic import BaseModel, Field
+
+
+{{#enums}}
+class {{name}}({{type}}, Enum):
+  {{#fields}}
+    {{name}} = {{{value}}}
+  {{/fields}}
+
+
+{{/enums}}
+{{#models}}
+class {{name}}(BaseModel):
+  {{#fields}}
+    {{name}}: {{#optional}}Optional[{{/optional}}{{type}}{{#optional}}]{{/optional}}{{#field_args}} = Field({{{field_args}}}){{/field_args}}
+  {{/fields}}
+
+
+{{/models}}

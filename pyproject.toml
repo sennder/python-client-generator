@@ -1,0 +1,65 @@
+[tool.poetry]
+name = "python-client-generator"
+version = "0.0.0"
+description = "Python package to generate an httpx-based client off an OpenAPI spec"
+readme = "README.md"
+authors = ["Trevor Pace <trevor.pace@sennder.com>","Bogdan Petre <bogdan.petre@sennder.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pydantic = "^1.9.1"
+chevron = "^0.14.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.1"
+coverage = { version = "^5.3", extras = ["toml"]}
+pytest-cov = "^2.10.1"
+flake8 = "^3.8.4"
+mypy = "^0.812"
+black = "22.3.0"
+import-linter = "^1.2.1"
+isort = "^5.7.0"
+httpx = "^0.23.0"
+fastapi = "^0.92.0"
+python-multipart = "^0.0.6"
+
+
+[tool.poetry.scripts]
+poetry = "poetry.console:main"
+
+[tool.isort]
+profile = "black"
+force_single_line = false
+atomic = true
+include_trailing_comma = true
+lines_after_imports = 2
+lines_between_types = 1
+use_parentheses = true
+src_paths = ["python_client_generator", "tests"]
+skip_glob = []
+filter_files = true
+known_first_party = "python_client_generator"
+
+[tool.black]
+line-length = 100
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.json
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | tests/expected
+)/
+'''
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

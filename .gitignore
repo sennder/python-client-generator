@@ -1,0 +1,17 @@
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# Python
+__pycache__/
+.venv
+
+.env
+
+# Generated dirs
+clients/
+tmp/

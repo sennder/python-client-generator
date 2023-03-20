@@ -1,0 +1,50 @@
+{
+    "branches": [
+        "main"
+    ],
+    "tagFormat": "${version}",
+    "plugins": [
+        [
+            "@semantic-release/commit-analyzer",
+            {
+                "preset": "conventionalcommits",
+                "releaseRules": [
+                    {
+                        "type": "docs",
+                        "scope": "api",
+                        "release": "patch"
+                    },
+                    {
+                        "type": "refactor",
+                        "release": "patch"
+                    },
+                    {
+                        "type": "build",
+                        "release": "patch"
+                    },
+                    {
+                        "type": "ci",
+                        "release": "patch"
+                    }
+                ]
+            }
+        ],
+        "@semantic-release/changelog",
+        "@semantic-release/release-notes-generator",
+        [
+            "@semantic-release/git",
+            {
+                "assets": [
+                    "CHANGELOG.md"
+                ]
+            }
+        ],
+        [
+            "@semantic-release/gitlab",
+            {
+                "successComment": false,
+                "failComment": false
+            }
+        ]
+    ]
+}
