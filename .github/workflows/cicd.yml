@@ -114,10 +114,10 @@ jobs:
     - name: Build and publish
       env:
         PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-        VERSION: ${{ needs.release.outputs.VERSION }}
+        VERSION: ${{ needs.release.outputs.output1 }}
       run: |
-        echo "Version  is ${{ steps.version-number.outputs.VERSION }}"
-        poetry version ${{ steps.version-number.outputs.VERSION }}
+        echo "Version is $VERSION"
+        poetry version $VERSION
         poetry build
         poetry config pypi-token.pypi $PYPI_TOKEN
         poetry publish
