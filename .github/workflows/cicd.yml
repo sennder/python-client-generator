@@ -99,7 +99,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.x'
+        python-version: '3.8'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -109,7 +109,8 @@ jobs:
       env:
         PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       run: |
-        poetry version {{ steps.version-number.outputs.VERSION }}
+        echo "Version is ${{ steps.version-number.outputs.VERSION }}"
+        poetry version ${{ steps.version-number.outputs.VERSION }}
         poetry build
         poetry config pypi-token.pypi $PYPI_TOKEN
         poetry publish
