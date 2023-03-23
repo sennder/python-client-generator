@@ -82,11 +82,15 @@ jobs:
         run: |
           # run semantic release and pipe the output both to the console and a log file
           semantic-release  2>&1 | tee log.txt
-      - name: Get version number
+      - name: Set version number
         id: version-number
         run: |
           # parse the output to get the new version number
+          export FOO=$(sed -rn 's/.*Published release (.*) on .* channel/\1/p' log.txt)
+          echo $FOO
           echo "VERSION=$(sed -rn 's/.*Published release (.*) on .* channel/\1/p' log.txt)" >> $GITHUB_OUTPUT
+      - name: Get version number
+        run: echo "Version number is ${{ steps.version-number.outputs.VERSION }}"
 
 
   publish:
