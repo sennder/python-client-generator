@@ -88,12 +88,7 @@ jobs:
         id: version-number
         run: |
           # parse the output to get the new version number
-          export FOO=$(sed -rn 's/.*Published release (.*) on .* channel/\1/p' log.txt)
-          echo $FOO
           echo "VERSION=$(sed -rn 's/.*Published release (.*) on .* channel/\1/p' log.txt)" >> $GITHUB_OUTPUT
-      - name: Get version number
-        run: echo "Version number is ${{ steps.version-number.outputs.VERSION }}"
-
 
   publish:
     name: Publish
@@ -116,7 +111,6 @@ jobs:
         PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         VERSION: ${{ needs.release.outputs.output1 }}
       run: |
-        echo "Version is $VERSION"
         poetry version $VERSION
         poetry build
         poetry config pypi-token.pypi $PYPI_TOKEN
