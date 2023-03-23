@@ -109,7 +109,7 @@ jobs:
       env:
         PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       run: |
-        echo "Version is ${{ steps.version-number.outputs.VERSION }}"
+        echo "Version  is ${{ steps.version-number.outputs.VERSION }}"
         poetry version ${{ steps.version-number.outputs.VERSION }}
         poetry build
         poetry config pypi-token.pypi $PYPI_TOKEN
