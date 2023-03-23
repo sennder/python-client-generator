@@ -86,7 +86,7 @@ jobs:
         id: version-number
         run: |
           # parse the output to get the new version number
-          run echo "VERSION=$(sed -rn 's/.*Published release (.*) on .* channel/\1/p' log.txt)" >> $GITHUB_OUTPUT
+          echo "VERSION=$(sed -rn 's/.*Published release (.*) on .* channel/\1/p' log.txt)" >> $GITHUB_OUTPUT
 
 
   publish:
