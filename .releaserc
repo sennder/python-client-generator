@@ -1,6 +1,7 @@
 {
     "branches": [
-        "main"
+        "main",
+        "CD-328-CD-3"
     ],
     "tagFormat": "${version}",
     "plugins": [
@@ -9,11 +10,6 @@
             {
                 "preset": "conventionalcommits",
                 "releaseRules": [
-                    {
-                        "type": "docs",
-                        "scope": "api",
-                        "release": "patch"
-                    },
                     {
                         "type": "refactor",
                         "release": "patch"
@@ -40,9 +36,8 @@
             }
         ],
         [
-            "@semantic-release/gitlab",
+            "@semantic-release/github",
             {
-                "successComment": false,
                 "failComment": false
             }
         ]
