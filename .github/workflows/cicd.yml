@@ -31,7 +31,7 @@ jobs:
     - name: Test with pytest
       run: |
         poetry run pytest --cov-report xml --cov-report term --cov=python_client_generator 
-    # TODO: set up codecov once the repo is public 
+    # TODO: set up codecov once the repo is public
     # - name: Upload coverage to Codecov
     #   uses: codecov/codecov-action@v1
     #   with:
@@ -80,7 +80,7 @@ jobs:
           conventional-changelog-conventionalcommits
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
         run: |
           # run semantic release and pipe the output both to the console and a log file
           semantic-release  2>&1 | tee log.txt
