@@ -3,7 +3,12 @@ name = "python-client-generator"
 version = "0.0.0"
 description = "Python package to generate an httpx-based client off an OpenAPI spec"
 readme = "README.md"
-authors = ["Trevor Pace <trevor.pace@sennder.com>","Bogdan Petre <bogdan.petre@sennder.com>"]
+authors = ["Bogdan Petre <bogdan.petre@sennder.com>", "Trevor Pace <trevor.pace@sennder.com>"]
+
+[project.urls]
+source = "https://github.com/sennder/python-client-generator"
+download = "https://github.com/sennder/python-client-generator/releases"
+tracker = "https://github.com/sennder/python-client-generator/issues"
 
 [tool.poetry.dependencies]
 python = "^3.8"
