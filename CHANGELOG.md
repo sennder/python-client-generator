@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/sennder/python-client-generator/compare/1.0.6...1.0.7) (2023-03-24)
+
+
+### Bug Fixes
+
+* fix repo link in toml file ([c29b3bd](https://github.com/sennder/python-client-generator/commit/c29b3bd12d407fe71ab58db543813a7bd6ed2501))
+
 ## [1.0.6](https://github.com/sennder/python-client-generator/compare/1.0.5...1.0.6) (2023-03-24)
 
 
