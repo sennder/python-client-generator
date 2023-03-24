@@ -31,7 +31,7 @@ jobs:
     - name: Test with pytest
       run: |
         poetry run pytest --cov-report xml --cov-report term --cov=python_client_generator 
-    # TODO: set up codecov once the repo is public
+    # TODO: set up codecov once the repo is public 
     # - name: Upload coverage to Codecov
     #   uses: codecov/codecov-action@v1
     #   with:
