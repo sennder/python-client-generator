@@ -4,9 +4,9 @@ version = "0.0.0"
 description = "Python package to generate an httpx-based client off an OpenAPI spec"
 readme = "README.md"
 authors = ["Bogdan Petre <bogdan.petre@sennder.com>", "Trevor Pace <trevor.pace@sennder.com>"]
+repository = "https://github.com/sennder/python-client-generator"
 
-[project.urls]
-source = "https://github.com/sennder/python-client-generator"
+[tool.poetry.urls]
 download = "https://github.com/sennder/python-client-generator/releases"
 tracker = "https://github.com/sennder/python-client-generator/issues"
 
