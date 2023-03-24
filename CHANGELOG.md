@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/sennder/python-client-generator/compare/1.0.5...1.0.6) (2023-03-24)
+
+
+### Bug Fixes
+
+* configure project URLs ([8ba7ae1](https://github.com/sennder/python-client-generator/commit/8ba7ae1646528224fee206a91ceda4b7929f0948))
+
 ## [1.0.5](https://github.com/sennder/python-client-generator/compare/1.0.4...1.0.5) (2023-03-23)
 
 ## [1.0.4](https://github.com/sennder/python-client-generator/compare/1.0.3...1.0.4) (2023-03-23)
