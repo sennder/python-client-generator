@@ -1,5 +1,6 @@
 from enum import Enum
 from typing import Any, Dict, Optional
+from uuid import UUID
 
 import httpx
 
@@ -13,8 +14,12 @@ class BaseClient(httpx.AsyncClient):
 
     @staticmethod
     def _serialize_param(v: Any) -> Any:
-        # TODO: Support for lists if needed
-        return v.value if isinstance(v, Enum) else v
+        if isinstance(v, Enum):
+            return v.value
+        elif isinstance(v, UUID):
+            return str(v)
+        else:
+            return v
 
     async def _request(
         self,
