@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/sennder/python-client-generator/compare/1.0.7...1.1.0) (2023-04-04)
+
+
+### Bug Fixes
+
+* resolve issue with multipart data and files ([fb60a6e](https://github.com/sennder/python-client-generator/commit/fb60a6ea6f1567090ad0a6d4a3a5d9109623a991))
+
+
+### Features
+
+* support UUID parameters in the base client ([af63dec](https://github.com/sennder/python-client-generator/commit/af63deca84afde1ec524ed726de1ce7356196c72))
+
 ## [1.0.7](https://github.com/sennder/python-client-generator/compare/1.0.6...1.0.7) (2023-03-24)
 
 
