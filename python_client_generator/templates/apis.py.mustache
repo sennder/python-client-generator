@@ -75,12 +75,12 @@ class {{class_name}}(BaseClient):
 {{#has_header_params}}
             _headers=_headers, 
 {{/has_header_params}}
-{{#multipart_data}}
+{{#has_multipart_data}}
             _multipart_data=_multipart_data,
-{{/multipart_data}}
-{{#multipart_files}}
+{{/has_multipart_data}}
+{{#has_multipart_files}}
             files=_files,
-{{/multipart_files}}
+{{/has_multipart_files}}
 {{#has_json_body}}
             _body=body,
             body_serializer_args=body_serializer_args,
