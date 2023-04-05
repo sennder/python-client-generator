@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/sennder/python-client-generator/compare/1.1.0...1.1.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* add authors to toml file ([12a7621](https://github.com/sennder/python-client-generator/commit/12a76216c4b6287ac5e35836a2a25124deb1375b))
+
 # [1.1.0](https://github.com/sennder/python-client-generator/compare/1.0.7...1.1.0) (2023-04-04)
 
 
