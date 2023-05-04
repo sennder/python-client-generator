@@ -7,6 +7,7 @@ Please check the [issue tracker](https://github.com/sennder/python-client-genera
 or feature request before creating a new issue.
 
 ### Setting up your local environment
+This project was developed using Python3.8, other python version have not been fully tested.
 
 Install the dependencies e.g. with `poetry`:
 ```shell

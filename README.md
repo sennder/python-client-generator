@@ -48,6 +48,5 @@ await api_client.update_contact_v1_contacts__contact_id__patch(
 )
 ```
 
-
 ## Contributing
 Please refer to [CONTRIBUTING.md](.github/CONTRIBUTING.md).
