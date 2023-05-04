@@ -14,7 +14,7 @@ flowchart LR
     generator -- "generates" --> package
 ```
 
-> :warning: **Currently does not support OpenAPI 2.0**: MR for < 3.0 support are welcome
+> :warning: **Currently does not support OpenAPI 2.0**: PR for < 3.0 support are welcome
 
 ## Using the generator
 
