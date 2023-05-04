@@ -11,6 +11,7 @@ from .generate_apis import generate_apis
 from .generate_base_client import generate_base_client
 from .generate_models import generate_models
 from .generate_pyproject import generate_pyproject
+from .exceptions import UnsupportedOpenAPISpec
 
 
 dir_path = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -31,6 +32,9 @@ def main() -> None:
     with open(args.open_api, "r") as f:
         swagger = json.load(f)
     dereferenced_swagger = dereference_swagger(swagger, swagger)
+
+    if not dereferenced_swagger.get("components"):
+        raise UnsupportedOpenAPISpec("OpenAPI file provided is not version 3.x")
 
     # Create root directory
     path = Path(args.outdir)

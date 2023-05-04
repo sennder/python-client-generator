@@ -1,0 +1,2 @@
+class UnsupportedOpenAPISpec(BaseException):
+    pass
