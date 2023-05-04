@@ -1,14 +1,18 @@
 import filecmp
 import os
+from copy import deepcopy
 
 from pathlib import Path
 from typing import Any, Dict
 
+import pytest
+
+from python_client_generator.exceptions import UnsupportedOpenAPISpec
 from python_client_generator.generate_apis import generate_apis
 from python_client_generator.generate_base_client import generate_base_client
 from python_client_generator.generate_models import generate_models
 from python_client_generator.generate_pyproject import generate_pyproject
-
+from python_client_generator.utils import assert_openapi_version
 
 EXPECTED_PATH = Path(os.path.dirname(os.path.realpath(__file__))) / "expected"
 
@@ -37,3 +41,10 @@ def test_pyproject(openapi: Dict[str, Any], tmp_path: Path) -> None:
         filecmp.cmp(EXPECTED_PATH / "pyproject.toml", tmp_path / "pyproject.toml", shallow=False)
         is True
     )
+
+
+def test_assert_openapi_version(openapi: Dict[str, Any]) -> None:
+    openapi_copy = deepcopy(openapi)
+    openapi_copy["openapi"] = "2.0.0"
+    with pytest.raises(UnsupportedOpenAPISpec):
+        assert_openapi_version(openapi_copy)

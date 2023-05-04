@@ -2,6 +2,10 @@ import re
 
 from typing import Any, Dict, List
 
+import semver
+
+from python_client_generator.exceptions import UnsupportedOpenAPISpec
+
 
 def lookup_by_ref_parts(obj: Dict[str, Any], ref_parts: List[str]) -> Dict[str, Any]:
     child = obj[ref_parts[0]]
@@ -96,3 +100,8 @@ def resolve_type(schema: Dict[str, Any], depth: int = 0, use_literals: bool = Fa
         return "List[" + resolve_type(schema["items"], depth + 1) + "]"
 
     raise Exception("property: ", schema)
+
+
+def assert_openapi_version(schema: Dict[str, Any]) -> None:
+    if not schema.get("openapi") or semver.Version.parse(schema.get("openapi")).major != 3:
+        raise UnsupportedOpenAPISpec("OpenAPI file provided is not version 3.x")

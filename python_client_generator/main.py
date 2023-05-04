@@ -5,9 +5,8 @@ import shutil
 
 from pathlib import Path
 
-from python_client_generator.utils import dereference_swagger
+from python_client_generator.utils import dereference_swagger, assert_openapi_version
 
-from .exceptions import UnsupportedOpenAPISpec
 from .generate_apis import generate_apis
 from .generate_base_client import generate_base_client
 from .generate_models import generate_models
@@ -31,10 +30,9 @@ def main() -> None:
 
     with open(args.open_api, "r") as f:
         swagger = json.load(f)
-    dereferenced_swagger = dereference_swagger(swagger, swagger)
 
-    if not dereferenced_swagger.get("components"):
-        raise UnsupportedOpenAPISpec("OpenAPI file provided is not version 3.x")
+    assert_openapi_version(swagger)
+    dereferenced_swagger = dereference_swagger(swagger, swagger)
 
     # Create root directory
     path = Path(args.outdir)
