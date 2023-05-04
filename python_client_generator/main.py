@@ -7,11 +7,11 @@ from pathlib import Path
 
 from python_client_generator.utils import dereference_swagger
 
+from .exceptions import UnsupportedOpenAPISpec
 from .generate_apis import generate_apis
 from .generate_base_client import generate_base_client
 from .generate_models import generate_models
 from .generate_pyproject import generate_pyproject
-from .exceptions import UnsupportedOpenAPISpec
 
 
 dir_path = Path(os.path.dirname(os.path.realpath(__file__)))
