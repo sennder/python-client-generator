@@ -2,7 +2,7 @@
 
 Python package to generate an [httpx](https://github.com/encode/httpx)- and
 [pydantic](https://github.com/pydantic/pydantic)-based async (or sync) 
-client off an OpenAPI spec.
+client off an OpenAPI spec >= 3.0.
 
 ```mermaid
 flowchart LR
@@ -14,6 +14,7 @@ flowchart LR
     generator -- "generates" --> package
 ```
 
+> :warning: **Currently does not support OpenAPI 2.0**: MR for < 3.0 support are welcome
 
 ## Using the generator
 
