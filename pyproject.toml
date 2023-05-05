@@ -27,6 +27,7 @@ isort = "^5.7.0"
 httpx = "^0.23.0"
 fastapi = "^0.92.0"
 python-multipart = "^0.0.6"
+semver = "^3.0.0"
 
 
 [tool.poetry.scripts]

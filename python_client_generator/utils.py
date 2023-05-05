@@ -103,5 +103,5 @@ def resolve_type(schema: Dict[str, Any], depth: int = 0, use_literals: bool = Fa
 
 
 def assert_openapi_version(schema: Dict[str, Any]) -> None:
-    if not schema.get("openapi") or semver.Version.parse(schema.get("openapi")).major != 3:
+    if not schema.get("openapi") or semver.Version.parse(schema.get("openapi")).major != 3:  # type: ignore # noqa: E501
         raise UnsupportedOpenAPISpec("OpenAPI file provided is not version 3.x")

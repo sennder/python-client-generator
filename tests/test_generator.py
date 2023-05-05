@@ -1,7 +1,7 @@
 import filecmp
 import os
-from copy import deepcopy
 
+from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict
 
@@ -13,6 +13,7 @@ from python_client_generator.generate_base_client import generate_base_client
 from python_client_generator.generate_models import generate_models
 from python_client_generator.generate_pyproject import generate_pyproject
 from python_client_generator.utils import assert_openapi_version
+
 
 EXPECTED_PATH = Path(os.path.dirname(os.path.realpath(__file__))) / "expected"
 
