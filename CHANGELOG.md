@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/sennder/python-client-generator/compare/1.1.2...1.1.3) (2023-05-05)
+
+
+### Bug Fixes
+
+* poetry version in publish ([8d99dda](https://github.com/sennder/python-client-generator/commit/8d99dda0e23e278f2d10d58ca45be4f109e2ba24))
+
 ## [1.1.2](https://github.com/sennder/python-client-generator/compare/1.1.1...1.1.2) (2023-05-05)
 
 
