@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/sennder/python-client-generator/compare/1.1.1...1.1.2) (2023-05-05)
+
+
+### Bug Fixes
+
+* throw error when openapi file provided not 3.x ([c99948f](https://github.com/sennder/python-client-generator/commit/c99948f70358a28f5f4414780d1cf5854c8d2c24))
+
 ## [1.1.1](https://github.com/sennder/python-client-generator/compare/1.1.0...1.1.1) (2023-04-05)
 
 
