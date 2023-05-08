@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/sennder/python-client-generator/compare/1.1.3...1.1.4) (2023-05-08)
+
+
+### Bug Fixes
+
+* add semver to dependencies ([2ba4245](https://github.com/sennder/python-client-generator/commit/2ba4245b79861a2c4866d53ba0b672798e7dbebf))
+
 ## [1.1.3](https://github.com/sennder/python-client-generator/compare/1.1.2...1.1.3) (2023-05-05)
 
 
