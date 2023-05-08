@@ -14,6 +14,7 @@ tracker = "https://github.com/sennder/python-client-generator/issues"
 python = "^3.8"
 pydantic = "^1.9.1"
 chevron = "^0.14.0"
+semver = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"
