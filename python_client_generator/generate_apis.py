@@ -6,7 +6,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 import chevron
 
-from .utils import resolve_type, sanitize_name, serialize_to_python_code
+from .utils import resolve_type, sanitize_name, serialize_to_python_code, to_python_name
 
 
 dir_path = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -83,7 +83,7 @@ def get_function_args(method: Dict[str, Any]) -> List[Dict[str, Any]]:
     # Convert params to args format required for templating
     return [
         {
-            "name": p["name"],
+            "name": to_python_name(p["name"]),
             "type": resolve_property_type(p),
             "default": resolve_property_default(p),
             "has_default": resolve_property_default(p) is not None,
@@ -97,7 +97,14 @@ def get_params_by_type(method: Dict[str, Any], type_: str) -> List[Dict[str, str
     :param str type_: `query` or `header`
     """
     params = method.get("parameters", [])
-    return [{"name": p["name"]} for p in params if p["in"] == type_]
+    return [
+        {
+            "name": p["name"],
+            "python_name": to_python_name(p["name"]),
+        }
+        for p in params
+        if p["in"] == type_
+    ]
 
 
 def has_json_body(method: Dict[str, Any]) -> bool:

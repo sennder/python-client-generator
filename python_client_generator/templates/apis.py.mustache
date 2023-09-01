@@ -30,7 +30,7 @@ class {{class_name}}(BaseClient):
         _query_params = { 
 {{/has_query_params}}
 {{#query_params}}
-            "{{name}}": {{name}},
+            "{{name}}": {{python_name}},
 {{/query_params}}
 {{#has_query_params}}
         }
@@ -40,7 +40,7 @@ class {{class_name}}(BaseClient):
         _headers = { 
 {{/has_header_params}}
 {{#header_params}}
-            "{{name}}": {{name}},
+            "{{name}}": {{python_name}},
 {{/header_params}}
 {{#has_header_params}}
         }
@@ -73,7 +73,7 @@ class {{class_name}}(BaseClient):
             _query_params=_query_params, 
 {{/has_query_params}}
 {{#has_header_params}}
-            _headers=_headers, 
+            _headers=_headers,
 {{/has_header_params}}
 {{#has_multipart_data}}
             _multipart_data=_multipart_data,
