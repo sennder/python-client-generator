@@ -109,6 +109,7 @@ class Api(BaseClient):
     async def create_foo_api_foo_post(
         self,
         body: Foo,
+        x_custom_header: Optional[str] = "default_value",
         body_serializer_args: Dict[str, Any] = {},
         **kwargs: Any
     ) -> Foo:
@@ -116,9 +117,14 @@ class Api(BaseClient):
         
         """ # noqa 
 
+        _headers = { 
+            "x-custom-header": x_custom_header,
+        }
+
         response = await self._request(
             "POST",
             "/api/foo",
+            _headers=_headers,
             _body=body,
             body_serializer_args=body_serializer_args,
             **kwargs

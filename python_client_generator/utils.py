@@ -49,6 +49,12 @@ def sanitize_name(name: str) -> str:
     return "".join(re.findall(r"[A-Za-z0-9]+[A-Za-z0-9_]*", name))
 
 
+def to_python_name(name: str) -> str:
+    name = name.replace("-", "_")  # Un-dash
+    name = re.sub(r"^\d*", "", name)  # Remove digits fom beginning
+    return name
+
+
 def resolve_type(schema: Dict[str, Any], depth: int = 0, use_literals: bool = False) -> str:
     """
     Resolve Python type for a given schema
