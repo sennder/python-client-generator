@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Generic, List, Optional, TypeVar
 from uuid import UUID
 
-from fastapi import APIRouter, FastAPI, File, Query, UploadFile
+from fastapi import APIRouter, FastAPI, File, Query, UploadFile, Header
 from pydantic import BaseModel
 from pydantic.generics import GenericModel
 from starlette.exceptions import HTTPException
@@ -61,7 +61,10 @@ async def list_foos(
 
 
 @router.post("", response_model=Foo)
-async def create_foo(foo_create: Foo) -> Foo:
+async def create_foo(
+    foo_create: Foo,
+    x_custom_header: str = Header(default="default_value"),
+) -> Foo:
     # TODO: get this to show in the openapi.json file
     if foo_create.field_1 == "something":
         raise HTTPException(409, "some custom exception")
