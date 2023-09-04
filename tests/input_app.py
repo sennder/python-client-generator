@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Generic, List, Optional, TypeVar
 from uuid import UUID
 
-from fastapi import APIRouter, FastAPI, File, Query, UploadFile, Header
+from fastapi import APIRouter, FastAPI, File, Header, Query, UploadFile
 from pydantic import BaseModel
 from pydantic.generics import GenericModel
 from starlette.exceptions import HTTPException

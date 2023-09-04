@@ -2,6 +2,6 @@
 # F403: 'from module import *' used; unable to detect undefined names
 # F405: Name may be undefined, or defined from star imports: module 
 # W503: Line break occurred before a binary operator
-ignore = F403,F405,W503
+ignore = F403,F405,W503,B008
 max-line-length = 100
 exclude = .git,__pycache__,__init__.py,.mypy_cache,.pytest_cache,*versions*,*patches*,.venv,scripts,tests/expected
