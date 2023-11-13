@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/sennder/python-client-generator/compare/1.1.5...1.1.6) (2023-11-13)
+
+
+### Bug Fixes
+
+* Fix 'KeyError' exception ([84144ae](https://github.com/sennder/python-client-generator/commit/84144ae07460c5271e9095e827e3772776f21126))
+
 ## [1.1.5](https://github.com/sennder/python-client-generator/compare/1.1.4...1.1.5) (2023-09-20)
 
 
