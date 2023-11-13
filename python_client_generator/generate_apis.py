@@ -17,7 +17,7 @@ def resolve_property_type(property: Dict[str, Any]) -> str:
     type_ = resolve_type(property["schema"])
     return (
         f"Optional[{type_}]"
-        if property.get("required") is False and property["schema"]["type"] != "boolean"
+        if property.get("required") is False and property["schema"].get("type") != "boolean"
         else type_
     )
 
