@@ -56,9 +56,15 @@ def _get_request_body_params(method: Dict[str, Any]) -> List[Dict[str, Any]]:
                 "schema": schema,
             }
         )
-    else:
+    elif "multipart/form-data" in content:
         # Create argument for each multipart upload property
         schema = content["multipart/form-data"]["schema"]
+        for k, v in schema["properties"].items():
+            args.append({"name": k, "schema": v})
+    elif "*/*" in content:
+        # Create argument for all types of request bodies
+        # See: https://swagger.io/docs/specification/describing-request-body/
+        schema = content["*/*"]["schema"]
         for k, v in schema["properties"].items():
             args.append({"name": k, "schema": v})
 
