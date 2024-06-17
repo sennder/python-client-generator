@@ -83,7 +83,7 @@ def resolve_type(schema: Dict[str, Any], depth: int = 0, use_literals: bool = Fa
     elif schema["type"] == "object":
         # If a schema has properties and a title, we can use the title as the type
         # name. Otherwise, we just return a generic Dict[str, Any]
-        # This happens when a schema has an object in the properties that doesn't reference another schema.
+        # This happens when a schema has an object in the properties that doesn't reference another schema.  # noqa E501
         # Example:
         # {
         #    "Schema_Name": {

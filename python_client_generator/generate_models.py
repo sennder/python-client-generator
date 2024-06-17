@@ -49,7 +49,7 @@ def _get_schema_references(schema: Dict[str, Any]) -> List[str]:
         return _get_schema_references(schema["items"])
     elif schema["type"] == "object" or (schema["type"] == "string" and "enum" in schema):
         # As some nested enums may not have a title, we need to check for it.
-        # This is observed to happen inside the properties of a schema that uses an enum with referencing to another enum schema (raw values instead)
+        # This is observed to happen inside the properties of a schema that uses an enum with referencing to another enum schema (raw values instead)  # noqa E501
         # Example:
         # "properties": { # properties of an object schema (type is object)
         #     "status": {
@@ -60,8 +60,8 @@ def _get_schema_references(schema: Dict[str, Any]) -> List[str]:
         #         ]
         #     }
         # }
-        # In this case, the enum values are not defined in a schema with a title, so we need to check for it.
-        # For the case where the enum values are defined in a schema with a title, the title will be used.
+        # In this case, the enum values are not defined in a schema with a title, so we need to check for it.  # noqa E501
+        # For the case where the enum values are defined in a schema with a title, the title will be used.  # noqa E501
         # Example:
         # "schemas": {
         #     ...,  # other schemas

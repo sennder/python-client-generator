@@ -5,7 +5,11 @@ import shutil
 
 from pathlib import Path
 
-from python_client_generator.utils import assert_openapi_version, dereference_swagger, add_schema_title_if_missing
+from python_client_generator.utils import (
+    add_schema_title_if_missing,
+    assert_openapi_version,
+    dereference_swagger,
+)
 
 from .generate_apis import generate_apis
 from .generate_base_client import generate_base_client
