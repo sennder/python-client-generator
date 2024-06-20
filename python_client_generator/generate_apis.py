@@ -33,21 +33,67 @@ def resolve_property_default(property: Dict[str, Any]) -> Optional[str]:
 
 
 def get_return_type(responses: Dict[str, Any]) -> Optional[str]:
-    successful_responses = [v for k, v in responses.items() if int(k) >= 200 and int(k) < 300]
-    if len(successful_responses) != 1:
-        raise Exception("Incorrect number of successful responses:", len(successful_responses))
+    def check_if_valid_success_response(key: str) -> bool:
+        if key == "default":
+            return True
 
-    schema = successful_responses[0]["content"]["application/json"]["schema"]
-    if not schema:
+        if key == "2XX":
+            return True
+
+        if int(key) >= 200 and int(key) < 300:
+            return True
+
+        return False
+
+    # Only consider successful responses
+    successful_responses_raw = {
+        k: v for k, v in responses.items() if check_if_valid_success_response(k)
+    }
+
+    if len(successful_responses_raw) == 0:
         return None
 
-    return sanitize_name(schema["title"])
+    # Pop the default response if there are multiple successful responses (e.g. 200, 201, 204)
+    if len(successful_responses_raw) > 1:
+        successful_responses_raw.pop("default", None)
+
+    # Map the responses to a list
+    successful_responses = [v for _, v in successful_responses_raw.items()]
+
+    # Not all successful responses have a content key, see: https://spec.openapis.org/oas/v3.0.3#responses-object
+    if "content" not in successful_responses[0]:
+        return None
+
+    content = successful_responses[0]["content"]
+
+    if "application/json" not in content:
+        return None
+
+    schema = successful_responses[0]["content"]["application/json"].get("schema")
+    if schema is None:
+        return None
+
+    if "type" not in schema:
+        return sanitize_name(schema["title"]) if "title" in schema else None
+
+    if schema["type"] == "array":
+        return f"List[{resolve_type(schema['items'])}]"
+    if schema["type"] == "object":
+        return sanitize_name(schema.get("title", "Dict[str, Any]"))
 
 
 def _get_request_body_params(method: Dict[str, Any]) -> List[Dict[str, Any]]:
-    args = []
+    """
+    Only handful of media types are supported:
+    - application/json
+    - multipart/form-data
+    - */* (all types)(only if schema is an object and defined with properties)
 
+    Media types' ranges are not supported at the moment (e.g. 'application/*').
+    """
+    args = []
     content = method["requestBody"]["content"]
+
     if "application/json" in content:
         schema = content["application/json"]["schema"]
         args.append(
@@ -57,14 +103,24 @@ def _get_request_body_params(method: Dict[str, Any]) -> List[Dict[str, Any]]:
             }
         )
     elif "multipart/form-data" in content:
+        schema = content["multipart/form-data"].get("schema")
+
+        # If schema is not defined with properties, we can't generate arguments
+        if schema is None or "properties" not in schema:
+            return args
+
         # Create argument for each multipart upload property
-        schema = content["multipart/form-data"]["schema"]
         for k, v in schema["properties"].items():
             args.append({"name": k, "schema": v})
     elif "*/*" in content:
-        # Create argument for all types of request bodies
+        # Attempt to create argument for all types of request bodies if the schema is of an object and defined with properties
         # See: https://swagger.io/docs/specification/describing-request-body/
-        schema = content["*/*"]["schema"]
+
+        schema = content["*/*"].get("schema")
+
+        if schema is None or "properties" not in schema:
+            return args
+
         for k, v in schema["properties"].items():
             args.append({"name": k, "schema": v})
 
@@ -82,9 +138,9 @@ def get_function_args(method: Dict[str, Any]) -> List[Dict[str, Any]]:
     keys = ["path", "query", "header"]
     parameters = method.get("parameters", [])
     for k in keys:
-        params += [p for p in parameters if p["in"] == k and p["required"]]
+        params += [p for p in parameters if p["in"] == k and p.get("required", False)]
     for k in keys:
-        params += [p for p in parameters if p["in"] == k and not p["required"]]
+        params += [p for p in parameters if p["in"] == k and not p.get("required", False)]
 
     # Convert params to args format required for templating
     return [

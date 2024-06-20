@@ -15,11 +15,11 @@ from python_client_generator.generate_pyproject import generate_pyproject
 from python_client_generator.utils import assert_openapi_version
 
 
-EXPECTED_PATH = Path(os.path.dirname(os.path.realpath(__file__))) / "expected"
+EXPECTED_PATH = Path(os.path.dirname(os.path.realpath(__file__))) / "expected/input_openapi_file"
 
 
-def test_models(openapi: Dict[str, Any], tmp_path: Path) -> None:
-    generate_models(openapi, tmp_path / "models.py")
+def test_models(input_file_openapi: Dict[str, Any], tmp_path: Path) -> None:
+    generate_models(input_file_openapi, tmp_path / "models.py")
     assert filecmp.cmp(EXPECTED_PATH / "models.py", tmp_path / "models.py", shallow=False) is True
 
 
@@ -31,21 +31,21 @@ def test_base_client(tmp_path: Path) -> None:
     )
 
 
-def test_apis(openapi: Dict[str, Any], tmp_path: Path) -> None:
-    generate_apis(openapi, tmp_path / "apis.py", group_by_tags=False, sync=False)
+def test_apis(input_file_openapi: Dict[str, Any], tmp_path: Path) -> None:
+    generate_apis(input_file_openapi, tmp_path / "apis.py", group_by_tags=False, sync=False)
     assert filecmp.cmp(EXPECTED_PATH / "apis.py", tmp_path / "apis.py", shallow=False) is True
 
 
-def test_pyproject(openapi: Dict[str, Any], tmp_path: Path) -> None:
-    generate_pyproject(openapi, tmp_path / "pyproject.toml", project_name="test-project")
+def test_pyproject(input_file_openapi: Dict[str, Any], tmp_path: Path) -> None:
+    generate_pyproject(input_file_openapi, tmp_path / "pyproject.toml", project_name="test-project")
     assert (
         filecmp.cmp(EXPECTED_PATH / "pyproject.toml", tmp_path / "pyproject.toml", shallow=False)
         is True
     )
 
 
-def test_assert_openapi_version(openapi: Dict[str, Any]) -> None:
-    openapi_copy = deepcopy(openapi)
+def test_assert_openapi_version(input_file_openapi: Dict[str, Any]) -> None:
+    openapi_copy = deepcopy(input_file_openapi)
     openapi_copy["openapi"] = "2.0.0"
     with pytest.raises(UnsupportedOpenAPISpec):
         assert_openapi_version(openapi_copy)

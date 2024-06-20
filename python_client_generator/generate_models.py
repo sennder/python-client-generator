@@ -81,7 +81,7 @@ def _get_schema_references(schema: Dict[str, Any]) -> List[str]:
         #     }
         # }
 
-        return [schema["title"] if "title" in schema else ""]
+        return [schema.get("title", "")]
     else:
         return []
 
