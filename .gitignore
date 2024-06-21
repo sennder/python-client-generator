@@ -16,3 +16,6 @@ __pycache__/
 clients/
 tmp/
 .idea/
+
+# Development files
+.test_files/
