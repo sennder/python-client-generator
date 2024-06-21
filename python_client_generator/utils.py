@@ -81,7 +81,28 @@ def resolve_type(schema: Dict[str, Any], depth: int = 0, use_literals: bool = Fa
     elif "type" not in schema:
         return "Any"
     elif schema["type"] == "object":
-        if "properties" in schema:
+        # If a schema has properties and a title, we can use the title as the type
+        # name. Otherwise, we just return a generic Dict[str, Any]
+        # This happens when a schema has an object in the properties that doesn't reference another schema.  # noqa E501
+        # Example:
+        # {
+        #    "Schema_Name": {
+        #        "title": "Schema_Name",
+        #        "type": "object",
+        #        "properties": {
+        #            "property_name": {
+        #                "type": "object",
+        #                "properties": {
+        #                    "nested_property": {
+        #                        "type": "string"
+        #                    }
+        #                }
+        #            }
+        #        }
+        #    }
+        # }
+
+        if "properties" in schema and "title" in schema:
             return sanitize_name(schema["title"])
         else:
             return "Dict[str, Any]"
@@ -111,3 +132,30 @@ def resolve_type(schema: Dict[str, Any], depth: int = 0, use_literals: bool = Fa
 def assert_openapi_version(schema: Dict[str, Any]) -> None:
     if not schema.get("openapi") or semver.Version.parse(schema.get("openapi")).major != 3:  # type: ignore # noqa: E501
         raise UnsupportedOpenAPISpec("OpenAPI file provided is not version 3.x")
+
+
+def add_schema_title_if_missing(schemas: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Add 'title' key to schemas if missing to prevent issues with type resolution.
+    Only adds title to object and enum schemas.
+
+    Args:
+        schemas (Dict[str, Any]): Swagger schemas under components.schemas
+    Returns:
+        Dict[str, Any]: Schemas with 'title' key added if missing
+
+    Raises:
+        ValueError: If schema is missing 'type' key
+    """
+
+    for k, v in schemas.items():
+        if "title" not in v and isinstance(v, dict):
+            schema_type = v.get("type")
+
+            if not schema_type:
+                raise ValueError(f"Schema {k} is missing 'type' key")
+
+            if schema_type == "object" or (schema_type == "string" and "enum" in v):
+                v["title"] = k
+
+    return schemas
