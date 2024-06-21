@@ -40,7 +40,7 @@ def get_return_type(responses: Dict[str, Any]) -> Optional[str]:
         if key == "2XX":
             return True
 
-        if int(key) >= 200 and int(key) < 300:
+        if 200 <= int(key) < 300:
             return True
 
         return False
@@ -60,7 +60,7 @@ def get_return_type(responses: Dict[str, Any]) -> Optional[str]:
     # Map the responses to a list
     successful_responses = [v for _, v in successful_responses_raw.items()]
 
-    # Not all successful responses have a content key, see: https://spec.openapis.org/oas/v3.0.3#responses-object
+    # Not all successful responses have a content key, see: https://spec.openapis.org/oas/v3.0.3#responses-object  # noqa E501
     if "content" not in successful_responses[0]:
         return None
 
@@ -80,6 +80,8 @@ def get_return_type(responses: Dict[str, Any]) -> Optional[str]:
         return f"List[{resolve_type(schema['items'])}]"
     if schema["type"] == "object":
         return sanitize_name(schema.get("title", "Dict[str, Any]"))
+
+    return None
 
 
 def _get_request_body_params(method: Dict[str, Any]) -> List[Dict[str, Any]]:
