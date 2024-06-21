@@ -4,4 +4,4 @@
 # W503: Line break occurred before a binary operator
 ignore = F403,F405,W503,B008
 max-line-length = 100
-exclude = .git,__pycache__,__init__.py,.mypy_cache,.pytest_cache,*versions*,*patches*,.venv,scripts,tests/expected
+exclude = .git,__pycache__,__init__.py,.mypy_cache,.pytest_cache,*versions*,*patches*,.venv,scripts,tests/expected,clients
