@@ -1,25 +1,20 @@
 import filecmp
 import os
 
-from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict
 
-import pytest
-
-from python_client_generator.exceptions import UnsupportedOpenAPISpec
 from python_client_generator.generate_apis import generate_apis
 from python_client_generator.generate_base_client import generate_base_client
 from python_client_generator.generate_models import generate_models
 from python_client_generator.generate_pyproject import generate_pyproject
-from python_client_generator.utils import assert_openapi_version
 
 
-EXPECTED_PATH = Path(os.path.dirname(os.path.realpath(__file__))) / "expected"
+EXPECTED_PATH = Path(os.path.dirname(os.path.realpath(__file__))) / "expected/fastapi_app_client"
 
 
-def test_models(openapi: Dict[str, Any], tmp_path: Path) -> None:
-    generate_models(openapi, tmp_path / "models.py")
+def test_models(fastapi_app_openapi: Dict[str, Any], tmp_path: Path) -> None:
+    generate_models(fastapi_app_openapi, tmp_path / "models.py")
     assert filecmp.cmp(EXPECTED_PATH / "models.py", tmp_path / "models.py", shallow=False) is True
 
 
@@ -31,21 +26,16 @@ def test_base_client(tmp_path: Path) -> None:
     )
 
 
-def test_apis(openapi: Dict[str, Any], tmp_path: Path) -> None:
-    generate_apis(openapi, tmp_path / "apis.py", group_by_tags=False, sync=False)
+def test_apis(fastapi_app_openapi: Dict[str, Any], tmp_path: Path) -> None:
+    generate_apis(fastapi_app_openapi, tmp_path / "apis.py", group_by_tags=False, sync=False)
     assert filecmp.cmp(EXPECTED_PATH / "apis.py", tmp_path / "apis.py", shallow=False) is True
 
 
-def test_pyproject(openapi: Dict[str, Any], tmp_path: Path) -> None:
-    generate_pyproject(openapi, tmp_path / "pyproject.toml", project_name="test-project")
+def test_pyproject(fastapi_app_openapi: Dict[str, Any], tmp_path: Path) -> None:
+    generate_pyproject(
+        fastapi_app_openapi, tmp_path / "pyproject.toml", project_name="fastapi-project"
+    )
     assert (
         filecmp.cmp(EXPECTED_PATH / "pyproject.toml", tmp_path / "pyproject.toml", shallow=False)
         is True
     )
-
-
-def test_assert_openapi_version(openapi: Dict[str, Any]) -> None:
-    openapi_copy = deepcopy(openapi)
-    openapi_copy["openapi"] = "2.0.0"
-    with pytest.raises(UnsupportedOpenAPISpec):
-        assert_openapi_version(openapi_copy)
