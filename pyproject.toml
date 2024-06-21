@@ -74,6 +74,7 @@ exclude = '''
   | build
   | dist
   | tests/expected
+  | clients
 )/
 '''
 
