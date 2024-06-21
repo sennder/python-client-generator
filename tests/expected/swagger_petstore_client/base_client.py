@@ -1,0 +1,61 @@
+from enum import Enum
+from typing import Any, Dict, Optional
+from uuid import UUID
+
+import httpx
+
+from pydantic import BaseModel
+
+
+class BaseClient(httpx.AsyncClient):
+    """
+    Base client for serializing Pydantic models and enums into httpx requests
+    """
+
+    @staticmethod
+    def _serialize_param(v: Any) -> Any:
+        if isinstance(v, Enum):
+            return v.value
+        elif isinstance(v, UUID):
+            return str(v)
+        else:
+            return v
+
+    async def _request(
+        self,
+        *args: Any,
+        _query_params: Dict[str, Any] = {},
+        _headers: Dict[str, Any] = {},
+        _multipart_data: Dict[str, Any] = {},
+        _body: Optional[BaseModel] = None,
+        body_serializer_args: Dict[str, Any] = {},
+        **kwargs: Any
+    ) -> httpx.Response:
+        """
+        Wrapper class for serializing pydantic models and enums into params/header/body
+        and sending a request
+        """
+
+        kwargs["params"] = {
+            **{k: self._serialize_param(v) for k, v in _query_params.items() if v is not None},
+            **kwargs.get("params", {}),
+        }
+
+        kwargs["headers"] = {
+            **{k: self._serialize_param(v) for k, v in _headers.items() if v is not None},
+            **kwargs.get("headers", {}),
+        }
+
+        kwargs["data"] = {
+            **{k: self._serialize_param(v) for k, v in _multipart_data.items() if v is not None},
+            **kwargs.get("data", {}),
+        }
+
+        if _body:
+            kwargs["content"] = _body.json(**body_serializer_args)
+            kwargs["headers"] = {
+                **{"Content-Type": "application/json"},
+                **kwargs.get("headers", {}),
+            }
+
+        return await self.request(*args, **kwargs)
