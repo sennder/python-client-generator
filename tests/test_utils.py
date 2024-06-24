@@ -1,7 +1,5 @@
 import typing as t
 
-from contextlib import contextmanager
-
 import pytest
 
 from python_client_generator.exceptions import UnsupportedOpenAPISpec
@@ -10,11 +8,7 @@ from python_client_generator.utils import (
     assert_openapi_version,
     dereference_swagger,
 )
-
-
-@contextmanager
-def does_not_raise() -> t.Generator:
-    yield
+from tests.utils import does_not_raise
 
 
 @pytest.mark.parametrize(

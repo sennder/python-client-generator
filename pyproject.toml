@@ -17,7 +17,6 @@ chevron = "^0.14.0"
 semver = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.1.1"
 coverage = { version = "^5.3", extras = ["toml"]}
 pytest-cov = "^2.10.1"
 flake8 = "^3.8.4"
@@ -33,6 +32,11 @@ semver = "^3.0.0"
 
 [tool.poetry.scripts]
 poetry = "poetry.console:main"
+
+[tool.poetry.group.dev.dependencies]
+respx = "^0.21.1"
+pytest = "7"
+pytest-asyncio = "^0.23.7"
 
 [tool.semantic_release]
 version_toml = [
