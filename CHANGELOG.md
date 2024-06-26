@@ -1,3 +1,21 @@
+# [1.2.0](https://github.com/sennder/python-client-generator/compare/1.1.6...1.2.0) (2024-06-26)
+
+
+### Bug Fixes
+
+* [#20](https://github.com/sennder/python-client-generator/issues/20): Fix KeyError: 'title' and related issues ([76c2060](https://github.com/sennder/python-client-generator/commit/76c20608b86b3818eb019877128eea1ab8792e2d))
+* fix linting issues ([7e68c7c](https://github.com/sennder/python-client-generator/commit/7e68c7c43e7f43b3ebe5d092a46ff47b07ac40f3))
+* linting ([528dcb7](https://github.com/sennder/python-client-generator/commit/528dcb7c717cf60bef04eebd55b30d279bcb2874))
+
+
+### Features
+
+* add missing tests ([938704a](https://github.com/sennder/python-client-generator/commit/938704a083baa1c89764dca8ace6e698d9d4e764))
+* exclude development test files ([57fb107](https://github.com/sennder/python-client-generator/commit/57fb10726c07183eb879b1eeae4d730170d2f04d))
+* update documentation ([cbb6067](https://github.com/sennder/python-client-generator/commit/cbb6067a931f449941b629a8015a9742250607b9))
+* update formatting/linting tools' configurations ([a7f9c9a](https://github.com/sennder/python-client-generator/commit/a7f9c9a20df5bdd240df806fcf207c3ffed4ff34))
+* update test setup and add missing tests (partial) ([25007d9](https://github.com/sennder/python-client-generator/commit/25007d9a24f8189a173ffb4e561b520050b35a14))
+
 ## [1.1.6](https://github.com/sennder/python-client-generator/compare/1.1.5...1.1.6) (2023-11-13)
 
 
