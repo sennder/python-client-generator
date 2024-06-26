@@ -8,7 +8,7 @@ import respx
 from tests.utils import does_not_raise
 
 from .expected.fastapi_app_client.apis import Api as FastApiAppClient
-from .expected.fastapi_app_client.models import Foo, Document, PaginatedFoo
+from .expected.fastapi_app_client.models import Document, Foo, PaginatedFoo
 
 
 client_base_url = "https://domain.tld"
@@ -87,7 +87,9 @@ async def test_upload_doc() -> None:
     route = respx.post(f"{client_base_url}/api/foo/{foo_id}/documents")
     route.mock(return_value=httpx.Response(200, content=document.json()))
 
-    response = await client.upload_doc_api_foo__foo_id__documents_post(file=file_data, foo_id=foo_id)
+    response = await client.upload_doc_api_foo__foo_id__documents_post(
+        file=file_data, foo_id=foo_id
+    )
 
     assert route.called
     assert response == document
