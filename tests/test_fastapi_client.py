@@ -7,8 +7,8 @@ import respx
 
 from tests.utils import does_not_raise
 
-from .expected.fastapi_app_client.apis import Api as FastApiAppClient
-from .expected.fastapi_app_client.models import Document, Foo, PaginatedFoo
+from .expected.fastapi_app_client.fastapi_project.apis import Api as FastApiAppClient
+from .expected.fastapi_app_client.fastapi_project.models import Document, Foo, PaginatedFoo
 
 
 client_base_url = "https://domain.tld"

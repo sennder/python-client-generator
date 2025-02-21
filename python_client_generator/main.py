@@ -26,12 +26,18 @@ def main() -> None:
     parser.add_argument("--open-api", type=str)
     parser.add_argument("--package-name", type=str)
     parser.add_argument("--project-name", type=str)
+    parser.add_argument("--author-name", type=str, required=False)
+    parser.add_argument("--author-email", type=str, required=False)
     parser.add_argument("--outdir", type=str, default="clients/")
     parser.add_argument("--group-by-tags", action="store_true")
     parser.add_argument("--sync", action="store_true")
 
     args = parser.parse_args()
 
+    if os.sep in args.package_name or (os.altsep is not None and os.altsep in args.package_name):
+        raise ValueError("package-name must not contain directory separators")
+    if "-" in args.package_name:
+        raise ValueError("package-name must not contain dashes")
     with open(args.open_api, "r") as f:
         swagger = json.load(f)
 
@@ -43,10 +49,18 @@ def main() -> None:
     path = Path(args.outdir)
     path.mkdir(parents=True, exist_ok=True)
 
-    generate_pyproject(dereferenced_swagger, path / "pyproject.toml", args.project_name)
+    project_path_first = args.package_name.split(".", maxsplit=1)[0]
+    generate_pyproject(
+        dereferenced_swagger,
+        path / "pyproject.toml",
+        args.project_name,
+        project_path_first,
+        args.author_name,
+        args.author_email,
+    )
 
     # Create package directory
-    package_path = path / Path(args.package_name)
+    package_path = path / Path(args.package_name.replace(".", os.sep))
     package_path.mkdir(parents=True, exist_ok=True)
 
     # Generate package files
