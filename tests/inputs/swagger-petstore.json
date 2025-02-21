@@ -1176,6 +1176,13 @@
                 "xml": {
                     "name": "##default"
                 }
+            },
+            "EmptyObjectWithEmptyProperties": {
+                "type": "object",
+                "properties": {}
+            },
+            "EmptyObjectWithNoProperties": {
+                "type": "object"
             }
         },
         "requestBodies": {
