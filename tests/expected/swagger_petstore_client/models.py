@@ -64,3 +64,11 @@ class ApiResponse(BaseModel):
     message: Optional[str]
 
 
+class EmptyObjectWithEmptyProperties(BaseModel):
+    pass
+
+
+class EmptyObjectWithNoProperties(BaseModel):
+    pass
+
+
