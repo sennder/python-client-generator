@@ -3,6 +3,7 @@ from enum import Enum
 from typing import Any, Dict, List, Literal, Optional, Union
 from uuid import UUID
 
+
 try:
   from pydantic.v1 import BaseModel, Field
 except ImportError:
