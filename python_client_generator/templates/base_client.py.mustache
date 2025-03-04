@@ -4,6 +4,7 @@ from uuid import UUID
 
 import httpx
 
+
 try:
     from pydantic.v1 import BaseModel
 except ImportError:
