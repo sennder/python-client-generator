@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/sennder/python-client-generator/compare/1.2.0...1.3.0) (2025-03-04)
+
+
+### Bug Fixes
+
+* aB[#108112](https://github.com/sennder/python-client-generator/issues/108112) fix linting ([4494a75](https://github.com/sennder/python-client-generator/commit/4494a758c0ffe506fff80382709ef122d59fb9a8))
+
+
+### Features
+
+* make python http generator compatible with pydantic v2 ([a478517](https://github.com/sennder/python-client-generator/commit/a47851749ba2368aea42c7d684c186d568c6ec31))
+
 # [1.2.0](https://github.com/sennder/python-client-generator/compare/1.1.6...1.2.0) (2024-06-26)
 
 
