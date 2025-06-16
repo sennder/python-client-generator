@@ -18,9 +18,14 @@ class FooEnum(str, Enum):
     OPTION_2 = "option_2"
 
 
+class EmptyObject(BaseModel):
+    pass
+
+
 class Bar(BaseModel):
     field_1: str
     field_2: Optional[bool]
+    field_3: Optional[EmptyObject]
 
 
 class Foo(BaseModel):

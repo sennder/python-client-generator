@@ -96,7 +96,7 @@ def get_references(model: Dict[str, Any]) -> List[str]:
     union_keys = list(set(["allOf", "anyOf", "oneOf"]) & set(model.keys()))
     if union_keys:
         return _get_schema_references(model)
-    else:
+    elif "properties" in model:
         # Must have properties
         for p_schema in model["properties"].values():
             refs += _get_schema_references(p_schema)
@@ -109,7 +109,7 @@ def get_fields(schema: Dict[str, Any]) -> List[Dict[str, Any]]:
     if union_keys:
         # Handle union cases by creating a __root__ defined model
         return [{"name": "__root__", "type": resolve_type(schema)}]
-    else:
+    elif "properties" in schema:
         return [
             {
                 "name": k,
@@ -119,6 +119,8 @@ def get_fields(schema: Dict[str, Any]) -> List[Dict[str, Any]]:
             }
             for k, v in schema["properties"].items()
         ]
+    else:
+        return []
 
 
 def _strip_nonexistant_refs(objects: List[Dict[str, Any]]) -> None:
